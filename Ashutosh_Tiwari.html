@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 100%;
+            width: 100%;
+            overflow:hidden
+        }
+        .circle{
+            position: absolute;
+            transition: 1s;
+            width: 5%;
+            height: 10.7%;
+            border-radius: 50px;
+        }
+
+        .one{            
+            top: 30%;
+            left:35%;
+            background-color: rgb(197, 117, 117);
+            z-index: 1;
+        }
+        .two{
+            top: 30%;
+            left:50%;
+            z-index: 2;
+            background-color: rgb(66, 104, 99);
+        }
+        .three{
+            bottom:29.3%;
+            left:35%;
+            background-color: rgb(216, 101, 159);
+            z-index: 3;
+        }
+        .four{
+            top: 60%;
+            right:45%;
+            background-color: rgb(149, 101, 189);
+            z-index: 4;
+        }
+
+        .buttons-div{
+            max-width: fit-content;
+            position:absolute;
+            top: 80%;
+            left:42%
+        }
+
+        button{
+            padding: 5px 10px;
+            background-color: rgb(181, 243, 217);
+            outline: none;
+            border-radius: 5px;
+        }
+
+        .animateHorizontal{
+            animation: animateHorizontal 2s infinite;
+        }
+        .animateVertical{
+            animation: animateVertical 2s infinite;
+        }
+
+        @keyframes animateHorizontal{
+            0%{
+                width : 5%;
+            }
+            50%
+            {
+                width: 20%;
+            }
+        }
+
+        @keyframes animateVertical{
+            0%{
+                height: 11% ;
+            }
+        50%{
+            height: 41%;
+            }
+        }        
+    </style>
+
+</head>
+<body>
+    <div class="circle one " id="idone" ></div>
+    <div class="circle two" id="idtwo"></div>
+    <div class="circle three" id="idthree"></div>
+    <div class="circle four" id="idfour"></div>
+
+    <div class="buttons-div">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+    </div>
+
+
+
+
+    <script>
+        const one= document.getElementById("idone")
+        const two= document.getElementById("idtwo")
+        const three= document.getElementById("idthree")
+        const four= document.getElementById("idfour")
+        const startBtn= document.getElementById("start");
+        const stopBtn= document.getElementById("stop");
+        
+        // ********Random color generator function*******//
+        
+        function randomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+       
+        
+
+        // On click Start/Stop event button*****//
+        startBtn.addEventListener("click", startAnimation);
+        stopBtn.addEventListener("click", stopAnimation);
+
+        // ********Animation start function*********//
+
+        function startAnimation(){            
+            one.classList.add("animateHorizontal");
+            four.classList.add("animateHorizontal");
+            two.classList.add("animateVertical");
+            three.classList.add("animateVertical");
+            play();
+        }
+        
+        // ********Animation Stop function*********//
+        function stopAnimation(){            
+            one.classList.remove("animateHorizontal");
+            two.classList.remove("animateVertical");
+            three.classList.remove("animateVertical");
+            four.classList.remove("animateHorizontal");
+            clearInterval(changeColor)            
+        }
+
+        
+        // ******* Change Color per interval function  *********//
+        var changeColor=null;
+        var  play=function(){
+            changeColor=setInterval(()=>{
+                one.style.backgroundColor=randomColor();
+                two.style.backgroundColor=randomColor();
+                three.style.backgroundColor=randomColor();
+                four.style.backgroundColor=randomColor();
+            },2000)}
+    </script>
+</body>
+</html>
